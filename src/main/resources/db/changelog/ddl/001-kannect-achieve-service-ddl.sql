@@ -1,4 +1,5 @@
-CREATE TABLE  badges IF NOT EXISTS(
+-- BADGES TABLE
+CREATE TABLE IF NOT EXISTS badges (
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -8,30 +9,28 @@ CREATE TABLE  badges IF NOT EXISTS(
     CONSTRAINT unique_badge_type UNIQUE (badge_type)
 );
 
-CREATE UNIQUE INDEX idx_badges_badge_type ON badges(badge_type);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_badges_badge_type ON badges(badge_type);
 
-
-CREATE TABLE tasks IF NOT EXISTS(
+-- TASKS TABLE
+CREATE TABLE IF NOT EXISTS tasks (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     assigned_to INTEGER NOT NULL,
     assigned_by INTEGER NOT NULL,
     deadline TIMESTAMP NOT NULL,
-    completed_at TIMESTAMP ,
-    status VARCHAR(50) NOT NULL, -- Status changed to String
+    completed_at TIMESTAMP,
+    status VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT fk_tasks_assigned_to FOREIGN KEY (assigned_to) REFERENCES users(id),
     CONSTRAINT fk_tasks_assigned_by FOREIGN KEY (assigned_by) REFERENCES users(id)
 );
 
-CREATE INDEX idx_tasks_assigned_to IF NOT EXISTS ON tasks(assigned_to);
-CREATE INDEX idx_tasks_deadline IF NOT EXISTS ON tasks(deadline);
+CREATE INDEX IF NOT EXISTS idx_tasks_assigned_to ON tasks(assigned_to);
+CREATE INDEX IF NOT EXISTS idx_tasks_deadline ON tasks(deadline);
 
-
-
+-- RECOGNITIONS TABLE
 CREATE TABLE IF NOT EXISTS recognitions (
     id SERIAL PRIMARY KEY,
     sender_user_id INTEGER NOT NULL,
@@ -41,20 +40,17 @@ CREATE TABLE IF NOT EXISTS recognitions (
     image_url VARCHAR(500),
     approved BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT fk_recognitions_badge FOREIGN KEY (badge_id) REFERENCES badges(id),
     CONSTRAINT fk_recognitions_sender FOREIGN KEY (sender_user_id) REFERENCES users(id),
-    CONSTRAINT fk_recognitions_receiver FOREIGN KEY (receiver_user_id) REFERENCES users(id),
-
-    INDEX idx_recognitions_sender (sender_user_id),
-    INDEX idx_recognitions_receiver (receiver_user_id),
-    INDEX idx_recognitions_badge_receiver (badge_id, receiver_user_id)
+    CONSTRAINT fk_recognitions_receiver FOREIGN KEY (receiver_user_id) REFERENCES users(id)
 );
 
+CREATE INDEX IF NOT EXISTS idx_recognitions_sender ON recognitions(sender_user_id);
+CREATE INDEX IF NOT EXISTS idx_recognitions_receiver ON recognitions(receiver_user_id);
+CREATE INDEX IF NOT EXISTS idx_recognitions_badge_receiver ON recognitions(badge_id, receiver_user_id);
 
-
-
-CREATE TABLE leaderboard_entries (
+-- LEADERBOARD ENTRIES TABLE
+CREATE TABLE IF NOT EXISTS leaderboard_entries (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     total_task_points INTEGER DEFAULT 0,
@@ -64,10 +60,8 @@ CREATE TABLE leaderboard_entries (
     period_end_date DATE NOT NULL,
     period_type VARCHAR(50) NOT NULL, -- WEEKLY / MONTHLY / QUARTERLY
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_leaderboard_user FOREIGN KEY (user_id) REFERENCES users(id),
-    
-    INDEX idx_leaderboard_user (user_id),
-    INDEX idx_leaderboard_period (period_start_date, period_end_date)
+    CONSTRAINT fk_leaderboard_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE INDEX IF NOT EXISTS idx_leaderboard_user ON leaderboard_entries(user_id);
+CREATE INDEX IF NOT EXISTS idx_leaderboard_period ON leaderboard_entries(period_start_date, period_end_date);
