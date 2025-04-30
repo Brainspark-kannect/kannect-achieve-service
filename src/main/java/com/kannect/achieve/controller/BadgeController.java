@@ -101,7 +101,7 @@ public class BadgeController implements IBadgeController {
 	@Override
     @PutMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('HR', 'ADMIN')")
-    public ResponseEntity<SuccessResponse> updateBadge(@PathVariable final Long badgeId, @RequestPart("data") final String badgeDTOStr,@RequestPart("file") final  MultipartFile badgePhoto) throws Exception, IOException {
+    public ResponseEntity<SuccessResponse> updateBadge(@PathVariable Long badgeId, @RequestPart("data") final String badgeDTOStr,@RequestPart("file") final  MultipartFile badgePhoto) throws Exception, IOException {
     	ObjectMapper objectmapper = new ObjectMapper();
     	BadgeDTO badgeDTO = new BadgeDTO();
 		try {

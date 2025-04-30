@@ -80,9 +80,9 @@ public class TaskController implements ITaskController {
     }
 
     @Override
-    @PostMapping("/by-status")
+    @GetMapping("/by-status")
     @PreAuthorize("hasAnyRole('ADMIN', 'HR', 'EMPLOYEE')")
-    public ResponseEntity<SuccessResponse> getTasksByStatus(@RequestBody List<String> statuses) {
+    public ResponseEntity<SuccessResponse> getTasksByStatus(@RequestParam List<String> statuses) {
         List<TaskDTO> tasks = taskService.getTaskByStatus(statuses);
         return ResponseEntity.ok(new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK, "Tasks fetched by status", tasks));
     }
