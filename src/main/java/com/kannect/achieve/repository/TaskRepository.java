@@ -13,11 +13,11 @@ import com.kannect.achieve.entity.Task;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-	List<Task> findByUserId(Long userId);
+	List<Task> findByAssignedTo(Long userId);
 
 	List<Task> findByStatusIn(List<String> status);
 
-	@Query("SELECT COALESCE(SUM(10), 0) FROM Task t WHERE t.userId = :userId AND t.status = :status AND t.completedAt BETWEEN :start AND :end")
+	@Query("SELECT COALESCE(SUM(10), 0) FROM Task t WHERE t.assignedTo = :userId AND t.status = :status AND t.completedAt BETWEEN :start AND :end")
 	int sumPointsByUserAndDateRange(@Param("userId") Long userId, @Param("status") String status,
 			@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 

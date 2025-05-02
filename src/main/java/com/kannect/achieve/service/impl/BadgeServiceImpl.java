@@ -22,7 +22,7 @@ import com.kannect.achieve.exception.RequestValidationFailedException;
 import com.kannect.achieve.exception.ResourceNotFoundException;
 import com.kannect.achieve.repository.BadgeRepository;
 import com.kannect.achieve.service.BadgeService;
-import com.kannect.achieve.utils.GcpStorageUploader;
+import com.kannect.achieve.utils.CloudinaryUploader;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
@@ -35,7 +35,7 @@ public class BadgeServiceImpl implements BadgeService {
 	private final BadgeRepository badgeRepository;
 	private final BadgeMapper badgeMapper;
 	private final Validator validator;
-	private final GcpStorageUploader gcpStorageUploader;
+	private final CloudinaryUploader cloudinaryUploader;
 	public static final Logger LOGGER = LoggerFactory.getLogger(BadgeServiceImpl.class);
 	
 	private static final List<String> VALID_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png", "image/jpg",
@@ -53,7 +53,7 @@ public class BadgeServiceImpl implements BadgeService {
 
 		if (badgePhoto != null && !badgePhoto.isEmpty()) {
 			String fileName = "badge-photos/" + UUID.randomUUID() + "-" + badgePhoto.getOriginalFilename();
-			badgePhotoUrl = gcpStorageUploader.uploadFile(badgePhoto, fileName);
+			badgePhotoUrl = cloudinaryUploader.uploadFile(badgePhoto, fileName);
 		}
 
 		Badge badge = badgeMapper.mapToBadge(badgeDTO);
@@ -147,7 +147,7 @@ public class BadgeServiceImpl implements BadgeService {
 
 		if (badgePhoto != null && !badgePhoto.isEmpty()) {
 			String fileName = "badge-photos/" + UUID.randomUUID() + "-" + badgePhoto.getOriginalFilename();
-			badgePhotoUrl = gcpStorageUploader.uploadFile(badgePhoto, fileName);
+			badgePhotoUrl = cloudinaryUploader.uploadFile(badgePhoto, fileName);
 		}
 		badge = badgeMapper.mapToBadge(badge, badgeDTO);
 		badge.setBadgeImageUrl(badgePhotoUrl);

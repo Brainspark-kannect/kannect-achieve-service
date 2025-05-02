@@ -56,7 +56,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public List<TaskDTO> getTasksForUser(Long userId) {
-		return taskMapper.mapToTaskDTOs(taskRepository.findByUserId(userId));
+		return taskMapper.mapToTaskDTOs(taskRepository.findByAssignedTo(userId));
 	}
 
 	@Override
