@@ -72,7 +72,6 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 
-		<!-- Lombok (optional but highly recommended for @Data, @Builder, etc.) -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
