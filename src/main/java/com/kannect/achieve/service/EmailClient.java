@@ -9,6 +9,6 @@ import com.kannect.achieve.dto.request.EmailRequest;
 @FeignClient(name = "email-service", url = "${email.service.url}")
 public interface EmailClient {
 
-    @PostMapping("/api/send-email")
+    @PostMapping("/email/send")
     void sendEmail(@RequestBody EmailRequest emailRequest);
 }
