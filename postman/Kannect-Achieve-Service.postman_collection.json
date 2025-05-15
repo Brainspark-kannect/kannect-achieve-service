@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "random-uuid",
+		"name": "Kannect-Achieve-Service",
+		"description": "Collection for Kannect Achievement Service APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/achieve/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/achieve/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "auth", "register"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/users/profile",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "users", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/users/profile",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "users", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Achievements",
+			"item": [
+				{
+					"name": "Get All Achievements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/achievements",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "achievements"]
+						}
+					}
+				},
+				{
+					"name": "Create Achievement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/achievements",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "achievements"]
+						}
+					}
+				},
+				{
+					"name": "Get Achievement by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/achievements/{id}",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "achievements", "{id}"]
+						}
+					}
+				},
+				{
+					"name": "Update Achievement",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/achievements/{id}",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "achievements", "{id}"]
+						}
+					}
+				},
+				{
+					"name": "Delete Achievement",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/achieve/api/v1/achievements/{id}",
+							"host": ["{{base_url}}"],
+							"path": ["achieve", "api", "v1", "achievements", "{id}"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8081"
+		}
+	]
+} 
