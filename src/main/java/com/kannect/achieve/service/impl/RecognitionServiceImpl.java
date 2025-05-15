@@ -103,6 +103,12 @@ public class RecognitionServiceImpl implements RecognitionService {
 	}
 
 	@Override
+	public List<RecognitionDTO> getNotApprovedRecognitions() {
+		return recognitionMapper.mapToRecognitionDTOs(
+				recognitionRepository.findAll().stream().filter(r -> !r.getApproved()).collect(Collectors.toList()));
+	}
+
+	@Override
 	public List<RecognitionDTO> getRecognitionsReceivedByUser(Long userId, String period) {
 		Pair<LocalDateTime, LocalDateTime> range = TimePeriodUtil.getCurrentPeriodBounds(period);
 		return recognitionMapper.mapToRecognitionDTOs(

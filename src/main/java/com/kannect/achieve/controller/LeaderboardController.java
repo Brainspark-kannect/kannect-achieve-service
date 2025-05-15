@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,15 @@ public class LeaderboardController {
 		List<LeaderboardEntry> leaderboard = leaderboardService.getLeaderboardByPeriod(periodType);
 		SuccessResponse successResponse = SuccessResponse.builder().statusCode(200).status(HttpStatus.OK)
 				.message("Leaderboard fetched successfully").data(leaderboard).build();
+
+		return ResponseEntity.ok(successResponse);
+	}
+
+	@PostMapping("/{periodType}")
+	public ResponseEntity<SuccessResponse> generateLeaderboardByType(@PathVariable String periodType) {
+		leaderboardService.generateLeaderboardByType(periodType);
+		SuccessResponse successResponse = SuccessResponse.builder().statusCode(200).status(HttpStatus.OK)
+				.message("Leaderboard fetched successfully").data(null).build();
 
 		return ResponseEntity.ok(successResponse);
 	}

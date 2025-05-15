@@ -61,6 +61,28 @@ public class LeaderboardServiceImpl implements LeaderboardService {
 	public void generateYearlyLeaderboard() {
 		generateLeaderboard("YEARLY", TimePeriodUtil.getCurrentYearBounds());
 	}
+	@Transactional
+	@Override
+	public void generateLeaderboardByType(String periodType){
+		 Pair<LocalDate, LocalDate> bounds;
+		    switch (periodType.toUpperCase()) {
+		        case "WEEKLY":
+		            bounds = TimePeriodUtil.getCurrentWeekBounds();
+		            break;
+		        case "MONTHLY":
+		            bounds = TimePeriodUtil.getCurrentMonthBounds();
+		            break;
+		        case "QUARTERLY":
+		            bounds = TimePeriodUtil.getCurrentQuarterBounds();
+		            break;
+		        case "YEARLY":
+		            bounds = TimePeriodUtil.getCurrentYearBounds();
+		            break;
+		        default:
+		            throw new IllegalArgumentException("Invalid period type: " + periodType);
+		    }
+		    generateLeaderboard(periodType,bounds);
+	}
 
 	@Transactional
 	private void generateLeaderboard(String periodType, Pair<LocalDate, LocalDate> bounds) {

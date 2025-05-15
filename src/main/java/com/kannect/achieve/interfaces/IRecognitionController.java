@@ -79,5 +79,7 @@ public interface IRecognitionController {
     })
     ResponseEntity<SuccessResponse> getApprovedRecognitions(
         @NotNull @Parameter(description = "Period (weekly, monthly, quarterly, yearly)") String period);
+
+	ResponseEntity<SuccessResponse> getNotApprovedRecognitions();
 }
 

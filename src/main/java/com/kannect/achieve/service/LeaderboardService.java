@@ -14,6 +14,8 @@ public interface LeaderboardService {
 
 	void generateWeeklyLeaderboard();
 
+	void generateLeaderboardByType(String periodType);
+
 	List<LeaderboardEntry> getLeaderboardByPeriod(String periodType);
 
 }

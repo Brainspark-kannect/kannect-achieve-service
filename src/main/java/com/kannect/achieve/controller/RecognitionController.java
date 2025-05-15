@@ -66,9 +66,25 @@ public class RecognitionController implements IRecognitionController {
 
     @Override
     @GetMapping("/approved")
-    @PreAuthorize("hasRole('HR') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('HR') or hasRole('ADMIN') or hasRole('EMPLOYEE')")
     public ResponseEntity<SuccessResponse> getApprovedRecognitions() {
         List<RecognitionDTO> recognitionDTOs = recognitionService.getApprovedRecognitions();
+
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .statusCode(200)
+                .status(HttpStatus.OK)
+                .message("Approved recognitions fetched successfully")
+                .data(recognitionDTOs)
+                .build();
+
+        return ResponseEntity.ok(successResponse);
+    }
+    
+    @Override
+    @GetMapping("/not/approved")
+    @PreAuthorize("hasRole('HR') or hasRole('ADMIN')")
+    public ResponseEntity<SuccessResponse> getNotApprovedRecognitions() {
+        List<RecognitionDTO> recognitionDTOs = recognitionService.getNotApprovedRecognitions();
 
         SuccessResponse successResponse = SuccessResponse.builder()
                 .statusCode(200)

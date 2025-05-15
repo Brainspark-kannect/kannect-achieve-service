@@ -18,4 +18,6 @@ public interface RecognitionService {
 
 	RecognitionDTO giveRecognition(RecognitionDTO recognitionDTO);
 
+	List<RecognitionDTO> getNotApprovedRecognitions();
+
 }
