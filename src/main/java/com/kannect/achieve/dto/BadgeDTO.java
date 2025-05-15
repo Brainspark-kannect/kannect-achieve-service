@@ -17,4 +17,5 @@ public class BadgeDTO {
 	private Integer recognitionPoints;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+	private String badgeImageUrl;
 }

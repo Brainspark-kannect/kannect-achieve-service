@@ -27,16 +27,16 @@ public class Recognition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "giver_id", nullable = false)
+    @Column(name = "sender_user_id", nullable = false)
     private Long giverId;
 
-    @Column(name = "receiver_id", nullable = false)
+    @Column(name = "receiver_user_id", nullable = false)
     private Long receiverId;
 
     @Column(name = "message", columnDefinition = "TEXT")
     private String message;
 
-    @Column(name = "date_given")
+    @Column(name = "created_at")
     private LocalDateTime dateGiven;
 
     @ManyToOne
