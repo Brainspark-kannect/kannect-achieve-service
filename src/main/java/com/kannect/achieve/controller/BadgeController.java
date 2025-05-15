@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/badges")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class BadgeController implements IBadgeController {
 
 	private final BadgeService badgeService;
